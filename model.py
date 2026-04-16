@@ -1,0 +1,25 @@
+import torch
+import torch.nn as nn
+
+class HousingPriceModel(nn.Module):
+    def __init__(self, input_size):
+        super().__init__()
+        
+        self.model = nn.Sequential(
+            nn.Linear(input_size, 64),
+            nn.ReLU(),
+            nn.Dropout(0.2),
+
+            nn.Linear(64, 128),
+            nn.ReLU(),
+            nn.Dropout(0.2),
+
+            nn.Linear(128, 64),
+            nn.ReLU(),
+
+            nn.Linear(64, 1),
+        )
+
+    def forward(self, x):
+        return self.model(x)
+
